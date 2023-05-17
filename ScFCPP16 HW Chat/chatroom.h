@@ -1,9 +1,12 @@
 #pragma once
+#define DEBUG
+
 
 #include <memory>
 #include <string>
 #include <vector>
 #include <deque>
+#include <functional>
 
 #include "message.h"
 #include "user.h"

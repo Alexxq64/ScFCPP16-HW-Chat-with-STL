@@ -73,7 +73,6 @@ namespace chat {
 			"send a message",
 			"view profile"
 		};
-		// int action = -1;
 		int action = 0;
 		while (true) {
 			menuPrompt("User's menu", actions, WHITE, CYAN_BG);
@@ -154,11 +153,6 @@ namespace chat {
 		int count = 0;
 		std::cout << "messages =>" << std::endl;
 		for (const auto& m : msgs_) {
-			// if (((ChatRoom::current_user_->getUsername() == m.getSender() || ChatRoom::current_user_->getUsername() == m.getReceiver()) && whoseMessages == "currentUser")
-			//     || whoseMessages == "allUsers") {
-			//     printMessage(m.getSender(), m.getReceiver(), m.getContent());
-			//     ++count;
-			// }
 			if (((ChatRoom::current_user_->getUsername() == m.getSender() || ChatRoom::current_user_->getUsername() == m.getReceiver())
 				|| (whoseMessages == "currentUser" && m.getReceiver() == "all"))
 				|| whoseMessages == "allUsers") {
@@ -175,7 +169,7 @@ namespace chat {
 	void ChatRoom::sendMessage()
 	{
 		// don't show in the final release
-#ifdef NDEBUG
+#ifdef DEBUG
 		if (msgs_.empty()) {
 			msgs_.emplace_back(Message("text1", "u1", "r1"));
 			msgs_.emplace_back(Message("text2", "r1", "t1"));
@@ -218,7 +212,7 @@ namespace chat {
 
 	void ChatRoom::signUp()
 	{
-#ifdef NDEBUG
+#ifdef DEBUG
 		if (users_.empty()) {
 			users_.emplace_back(User("u1", "u", "u"));
 			users_.emplace_back(User("r1", "r", "r"));
@@ -237,7 +231,6 @@ namespace chat {
 		std::cin >> password;
 		User client(username, password, name);
 		users_.emplace_back(client);
-
 		std::cout << GREEN << "Account was created" << RESET << std::endl;
 	}
 
@@ -252,7 +245,8 @@ namespace chat {
 		std::cout << "Enter the password: ";
 		std::cin >> password;
 		current_user_ = lookUpUserByUsername(username);
-		if (!current_user_ || (password != current_user_->getPassword())) {
+		//if (!current_user_ || (password != current_user_->getPassword())) {
+		if (!current_user_ || (std::hash<std::string>{}(password) != current_user_->getHashedPassword())) {
 			current_user_ = nullptr;
 			if (attempts_num == 3) {
 				std::cerr << "Password was entered 3 times wrong. Wait 20 seconds" << std::endl;
