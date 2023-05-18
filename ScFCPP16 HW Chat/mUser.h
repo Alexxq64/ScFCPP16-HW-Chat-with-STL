@@ -4,16 +4,13 @@
 
 namespace chat {
     class mUser final {
-        //const std::string username_;
-        //std::string password_;
+    private:
         std::size_t hashedPassword_;
         std::string name_;
         std::string description_;
 
     public:
-        //User(const std::string& username, const std::string& password, const std::string& name)
-        mUser(const std::string& password, const std::string& name)
-            :             //, password_(password),
+        mUser(const std::string& password, const std::string& name):
             name_(name)
         {
             hashedPassword_ = std::hash<std::string>{}(password);
@@ -21,12 +18,14 @@ namespace chat {
         }
         // getters
         const std::string& getName() const noexcept;
-        //const std::string& getUsername() const noexcept;
-        //const std::string& getPassword() const noexcept;
         const std::size_t getHashedPassword() const noexcept;
         const std::string& getDescription() const noexcept;
         // setters
         void setName(const std::string& name) noexcept;
+        //void setName(const std::string& name) const noexcept {
+        //    name_ = name;
+        //}
+        //void setName(std::string& name) noexcept;
         void setPassword(const std::string& pass) noexcept;
         void setDescription(const std::string& description) noexcept;
     };

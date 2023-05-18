@@ -187,7 +187,7 @@ namespace chat {
 				<< RESET;
 			return;
 		}
-		if (receiver == chat::mChatRoom::current_user_ID) {
+		if (receiver == mChatRoom::current_user_ID) {
 			std::cout << YELLOW << "You can't send a message to yourself\n\n"
 				<< RESET;
 			return;
@@ -236,14 +236,14 @@ namespace chat {
 	void mChatRoom::signIn()
 	{
 		static int attempts_num;
-		std::string username, password;
+		std::string userID, password;
 		std::cout << "Enter the username: ";
-		std::cin >> username;
-		if (!mUsers_.count(username))
+		std::cin >> userID;
+		if (!mUsers_.count(userID))
 			throw user_not_existed_error();
 		std::cout << "Enter the password: ";
 		std::cin >> password;
-		current_user_ID = username;
+		current_user_ID = userID;
 		//if (!current_user_ || (password != current_user_->getPassword())) {
 		if ((std::hash<std::string>{}(password) != mUsers_.at(current_user_ID).getHashedPassword())) {
 			current_user_ID = "";
@@ -293,14 +293,14 @@ namespace chat {
 
 	void mChatRoom::viewAccount() const
 	{
-		std::string username;
+		std::string userID;
 		std::string profile;
 
 		std::cout << "User 'my' to view your profile" << std::endl
 			<< "Which profile do you want to view?" << std::endl;
 
-		std::cin >> username;
-		if (username == "my") {
+		std::cin >> userID;
+		if (userID == "my") {
 			char answer;
 			std::cout << "Your profile is " << current_user_ID << std::endl
 				<< "Name: " << mUsers_.at(current_user_ID).getName() << std::endl
@@ -328,22 +328,22 @@ namespace chat {
 				std::getline(std::cin, new_value);
 				switch (action) {
 				case 1:
-					std::cout << "Set new name" << std::endl;
+					std::cout << "Set new name. In developing" << std::endl;
 					//mUsers_.at(current_user_ID).setName(new_value);
 					break;
 				case 2:
-					std::cout << "Set new description" << std::endl;
+					std::cout << "Set new description. In developing" << std::endl;
 					//mUsers_.at(current_user_ID).setDescription(new_value);
 					break;
 				case 3:
-					std::cout << "Set new password" << std::endl;
+					std::cout << "Set new password. In developing" << std::endl;
 					//mUsers_.at(current_user_ID).setPassword(new_value);
 					break;
 				}
 			}
 			return;
 		}
-		profile = username;
+		profile = userID;
 		if (!mUsers_.count(profile))
 			throw user_not_existed_error();
 
@@ -351,21 +351,4 @@ namespace chat {
 			<< "Name: " << profile << std::endl
 			<< "Description: " << (mUsers_.at(profile).getDescription().empty() ? "not set" : mUsers_.at(profile).getDescription()) << std::endl;
 	}
-
-	//bool mChatRoom::isUserExisted(const std::string& username) const
-	//{
-	//	return lookUpUserByUsername(username) ? true : false;
-	//}
-
-	//std::shared_ptr<chat::User> mChatRoom::lookUpUserByUsername(const std::string& username) const
-	//{
-	//	for (const auto& user : mUsers_) {
-	//		if (user.getUsername() == username) {
-	//			return std::make_shared<User>(user);
-	//		}
-	//	}
-	//	return nullptr;
-	//}
-
-} // namespace chat
-
+}

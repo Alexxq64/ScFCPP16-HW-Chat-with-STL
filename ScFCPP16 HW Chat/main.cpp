@@ -7,33 +7,23 @@
 // to implement item 2 added library <functional> that includes, among other things, hash functions 
 // password hash is stored instead of password itself by registration 
 // and by authorization password hash is compared with the previously entered one 
+// to implement item 3 vector <user_> users_ changed to unordered_map <string id, mUser> mUsers_ and 
+// user_(id, password, name) changed to mUser_(password, name) and
+// accordingly all the necessary functions have been changed
 
-/*Using a std::unordered_map with std::string keys and User values can be more efficient
-when looking up users by their id, as the map uses a hash table to provide O(1) average case lookup time. 
-However, it can be less efficient than a vector when iterating through all the users in the chat room, 
+/*Using unordered_map with string key and mUser values can be more efficient
+when looking up users by their id, as the map uses hash table to provide O(1) average case lookup time. 
+However, it can be less efficient than vector when iterating through all the users in the chat room, 
 as vectors provide O(1) random access and contiguous memory access.
-Using a std::vector with User elements can be more efficient when iterating through all users in the chat room, 
-as vectors provide O(1) random access and contiguous memory access. 
-However, it can be less efficient when looking up users by their id, as you would need to iterate 
-over the entire vector to find the user with the matching id, resulting in O(n) worst case lookup time.
-So, if you need to frequently look up users by their id, a std::unordered_map might be a better choice. 
-If you need to frequently iterate over all users in the chat room, a std::vector might be a better choice.
+So, if you need to frequently look up users by their id, unordered_map might be a better choice. 
+If you need to frequently iterate over all users in the chat room, vector might be a better choice.
 */
 
 
 #include "mChatroom.h"
-#ifndef DEBUG
-#include "chatroom.h"
-#endif
-//#include <iostream>
 
 int main(void)
 {
-#ifndef DEBUG
-    chat::ChatRoom chatroom;
-    chatroom.showMenu();
-
-#endif
     chat::mChatRoom chatroom;
     chatroom.showMenu();
 

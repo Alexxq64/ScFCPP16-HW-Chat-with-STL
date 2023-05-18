@@ -14,32 +14,27 @@
 
 namespace chat {
 
-    class mChatRoom {
-        std::string current_user_ID;
-        bool isAuthorized_ = false;
-        std::deque<mMessage> msgs_;
-        //std::vector<User> users_;
-        std::unordered_map<std::string, mUser> mUsers_;
+	class mChatRoom {
+		std::string current_user_ID;
+		bool isAuthorized_ = false;
+		std::deque<mMessage> msgs_;
+		std::unordered_map<std::string, mUser> mUsers_;
 
-    public:
-        void showMenu();
+	public:
+		void showMenu();
 
-    private:
-        void showAuthMenu();
-        //void showProfileMenu();
+	private:
+		void showAuthMenu();
 
-        void displayAllMessages(const std::string& whoseMessages = "allUsers") const;
-        void sendMessage();
-        void selectAction(unsigned int action);
-        // login in an account previously created by signUp()
-        void signIn();
-        // creating a new account in std::vector<User> users_
-        void signUp();
+		void displayAllMessages(const std::string& whoseMessages = "allUsers") const;
+		void sendMessage();
+		void selectAction(unsigned int action);
+		// login in an account previously created by signUp()
+		void signIn();
+		// creating a new account in mUsers_
+		void signUp();
 
-        void viewAccount() const;
+		void viewAccount() const;
+	};
 
-        //bool isUserExisted(const std::string& userID) const;
-        //std::shared_ptr<mUser> lookUpUserByUsername(const std::string& userID) const;
-    };
-
-} // namespace chat
+}

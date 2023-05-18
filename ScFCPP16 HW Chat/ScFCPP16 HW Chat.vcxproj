@@ -127,22 +127,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="chatroom.cpp" />
     <ClCompile Include="mChatroom.cpp" />
-    <ClCompile Include="message.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mMessage.cpp" />
     <ClCompile Include="mUser.cpp" />
-    <ClCompile Include="user.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="chatroom.h" />
     <ClInclude Include="exceptions.h" />
     <ClInclude Include="mChatroom.h" />
-    <ClInclude Include="message.h" />
     <ClInclude Include="mMessage.h" />
     <ClInclude Include="mUser.h" />
-    <ClInclude Include="user.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
